@@ -37,7 +37,7 @@ import os
 import cStringIO
 
 # Local imports
-import lex, yacc
+from ply import lex, yacc
 
 from Tkinter import *
 from tkMessageBox import *
