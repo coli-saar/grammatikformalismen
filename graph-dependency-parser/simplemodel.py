@@ -6,15 +6,15 @@ from transformers.modeling_outputs import BaseModelOutputWithPoolingAndCrossAtte
 
 
 class MlpParsingModel(nn.Module):
-    def __init__(self, roberta_hidden_dim=768, arc_mlp_dim=500, roberta_id="xlm-roberta-base", dropout=0.1, activation="relu"):
+    def __init__(self, roberta_hidden_dim=768, mlp_dim=500, roberta_id="xlm-roberta-base", dropout=0.1, activation="relu"):
         super().__init__()
 
         self.roberta_hidden_dim = roberta_hidden_dim
-        self.mlp_dim = arc_mlp_dim
+        self.mlp_dim = mlp_dim
 
         # https://huggingface.co/docs/transformers/v4.34.1/en/main_classes/model#transformers.PreTrainedModel.from_pretrained
         self.roberta = XLMRobertaModel.from_pretrained(roberta_id)
-        self.mlp = Sequential(Linear(roberta_hidden_dim, arc_mlp_dim), ReLU(), Linear(arc_mlp_dim, arc_mlp_dim), ReLU())
+        self.mlp = Sequential(Linear(roberta_hidden_dim, mlp_dim), ReLU(), Linear(mlp_dim, mlp_dim), ReLU())
 
         # freeze Roberta parameters
         for name, param in self.named_parameters():
@@ -29,7 +29,7 @@ class MlpParsingModel(nn.Module):
         seqlen = x.shape[1]
 
         # encode x with Roberta
-        out: BaseModelOutputWithPoolingAndCrossAttentions = self.roberta(x, attention_mask=attention_mask)
+        out = self.roberta(x, attention_mask=attention_mask)
         hidden_states = out.last_hidden_state  # (bs, seqlen, hidden_size)
 
         emb = self.mlp(hidden_states) # (bs, seqlen, mlp_dim)

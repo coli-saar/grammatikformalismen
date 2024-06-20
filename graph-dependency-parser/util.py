@@ -15,7 +15,7 @@ class Config(BaseModel):
     betas: List[float] = [0.9, 0.999]
     wandb_project: str
     architecture: str
-
+    cuda_device: str = "0"
 
     @staticmethod
     def load(filename) -> "Config":
