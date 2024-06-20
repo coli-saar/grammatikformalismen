@@ -1,0 +1,12 @@
+
+
+debug: False
+batchsize: 16
+epochs: 1000
+lr: 0.0008
+activation: relu
+learning_rate: 0.0002
+betas: [0.9, 0.999]
+wandb_project: "dependency-parser"
+architecture: "my-model-description"
+

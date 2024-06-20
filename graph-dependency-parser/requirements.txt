@@ -1,0 +1,7 @@
+transformers
+datasets
+conllu
+ufal.chu_liu_edmonds
+icecream
+wandb
+pydantic
