@@ -13,9 +13,8 @@ class Config(BaseModel):
     dropout: float = 0.1
     transformer_activation: str = "relu"
     betas: List[float] = [0.9, 0.999]
-    wandb_project: str
-    architecture: str
-    cuda_device: str = "0"
+    limit_train: int = 1000000000
+    limit_dev: int = 1000000000
 
     @staticmethod
     def load(filename) -> "Config":
