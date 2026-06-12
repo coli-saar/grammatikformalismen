@@ -126,7 +126,7 @@ def train(config:Config,UD_DATASET:oF,Y:Module):
   oV("If you're on a Mac, check that you have MacOS 12.3+, an MPS-enabled chip, and current Pytorch.")
  X=["acl","acl:relcl","advcl","advcl:relcl","advmod","advmod:emph","advmod:lmod","amod","appos","aux","aux:pass","case","cc","cc:preconj","ccomp","clf","compound","compound:lvc","compound:prt","compound:redup","compound:svc","conj","cop","csubj","csubj:outer","csubj:pass","dep","det","det:numgov","det:nummod","det:poss","discourse","dislocated","expl","expl:impers","expl:pass","expl:pv","fixed","flat","flat:foreign","flat:name","goeswith","iobj","list","mark","nmod","nmod:poss","nmod:tmod","nsubj","nsubj:outer","nsubj:pass","nummod","nummod:gov","obj","obl","obl:agent","obl:arg","obl:lmod","obl:tmod","orphan","parataxis","punct","reparandum","root","vocative","xcomp","det:predet","obl:npmod","nmod:npmod"]
  T={rel:i for i,rel in oX(X)}
- x=load_dataset("universal_dependencies",UD_DATASET,trust_remote_code=oY)
+ x=load_dataset("universal-dependencies/universal_dependencies",UD_DATASET,trust_remote_code=oY)
  F=XLMRobertaTokenizerFast.from_pretrained("xlm-roberta-base",add_prefix_space=oY)
  B=x.map(z,batched=oY,batch_size=config.batchsize) 
  Y=Y.to(s)

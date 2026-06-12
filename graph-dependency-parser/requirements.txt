@@ -1,5 +1,5 @@
 transformers
-datasets
+datasets<4.0
 conllu
 ufal.chu_liu_edmonds
 icecream
